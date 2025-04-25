@@ -80,7 +80,7 @@ class ProductCard extends ConsumerWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            _truncateTitle(product.title),
+            truncateTitle(product.title),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
@@ -149,7 +149,7 @@ class ProductCard extends ConsumerWidget {
     );
   }
 
-  String _truncateTitle(String title) {
+  String truncateTitle(String title) {
     if (title.length > 15) {
       return '${title.substring(0, 15)}...';
     }
