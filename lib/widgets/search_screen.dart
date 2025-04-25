@@ -20,11 +20,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     super.initState();
     _searchController.addListener(_onSearchChanged);
 
-    // Load initial products when screen opens
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(productsProvider.notifier).loadProducts(refresh: true);
-
-      // Set focus to the search field
       _searchFocusNode.requestFocus();
     });
   }
@@ -89,19 +86,19 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             ],
           ),
           const SizedBox(height: 16),
-          _buildSortOption(
+          buildSortOption(
             'Price - High to Low',
             SortOption.priceHighToLow,
             currentOption,
           ),
           const Divider(),
-          _buildSortOption(
+          buildSortOption(
             'Price - Low to High',
             SortOption.priceLowToHigh,
             currentOption,
           ),
           const Divider(),
-          _buildSortOption(
+          buildSortOption(
             'Rating',
             SortOption.rating,
             currentOption,
@@ -112,7 +109,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     );
   }
 
-  Widget _buildSortOption(String title, SortOption option, SortOption currentOption) {
+  Widget buildSortOption(String title, SortOption option, SortOption currentOption) {
     return InkWell(
       onTap: () {
         ref.read(sortOptionProvider.notifier).state = option;
@@ -141,7 +138,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Search bar and filter button
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -192,7 +189,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               ),
             ),
 
-            // Products grid
+
             Expanded(
               child: productsState.isLoading && productsState.products.isEmpty
                   ? const Center(child: CircularProgressIndicator())
